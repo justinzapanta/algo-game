@@ -1,0 +1,164 @@
+[gd_scene load_steps=18 format=3 uid="uid://d2ss7ota7j2sv"]
+
+[ext_resource type="Texture2D" uid="uid://dtwkc5kmr4ekx" path="res://character/player.png" id="1_ti2xo"]
+[ext_resource type="Script" path="res://Player.gd" id="1_tsxqc"]
+[ext_resource type="Texture2D" uid="uid://dmiia2qbx53ts" path="res://color/rgyxd48l.png" id="2_lmy1i"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m3h8u"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(0, 0, 48, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqcls"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(48, 0, 48, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0akm"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(96, 0, 48, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2wws2"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(144, 0, 48, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iaaf7"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(192, 0, 48, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s003b"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(240, 0, 48, 53)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3r8g7"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fs2vc"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(48, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pi6vs"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(96, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rv0gn"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(144, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8hy24"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(192, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxrbt"]
+atlas = ExtResource("1_ti2xo")
+region = Rect2(240, 192, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m5xio"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m3h8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqcls")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0akm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2wws2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iaaf7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_s003b")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3r8g7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fs2vc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pi6vs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rv0gn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8hy24")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxrbt")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2emom"]
+radius = 6.08276
+
+[node name="Level 1" type="Node2D"]
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_tsxqc")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(11, 66)
+sprite_frames = SubResource("SpriteFrames_m5xio")
+animation = &"walk"
+frame_progress = 0.550963
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(11, 68)
+shape = SubResource("CircleShape2D_2emom")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(5, 5)
+limit_left = 0
+limit_top = 0
+drag_top_margin = 0.17
+drag_right_margin = 0.12
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
+[node name="HTTPRequest" type="HTTPRequest" parent="Player"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(75, 47)
+scale = Vector2(0.0956469, 0.0230815)
+texture = ExtResource("2_lmy1i")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Sprite2D"]
+offset_left = -298.0
+offset_top = -173.0
+offset_right = 66.0
+offset_bottom = 87.0
+scale = Vector2(0.925374, 2.46159)
+theme_override_font_sizes/normal_font_size = 100
+text = "Walk = "
+
+[node name="TextEdit" type="TextEdit" parent="Sprite2D"]
+offset_left = 31.0
+offset_top = -173.0
+offset_right = 303.0
+offset_bottom = 174.0
+theme_override_font_sizes/font_size = 150
+placeholder_text = " "
+
+[node name="Button" type="Button" parent="."]
+offset_left = 43.0
+offset_top = 80.0
+offset_right = 134.0
+offset_bottom = 111.0
+text = "Run"
+
+[connection signal="request_completed" from="Player/HTTPRequest" to="Player" method="_on_http_request_request_completed"]
+[connection signal="text_changed" from="Sprite2D/TextEdit" to="Player" method="_on_text_edit_text_changed"]
+[connection signal="pressed" from="Button" to="Player" method="_on_button_pressed"]
