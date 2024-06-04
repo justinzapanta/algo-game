@@ -4,11 +4,11 @@ var node2d_scene : PackedScene = preload("res://scenes/blocks/code_block_move.ts
 
 signal block_added
 
-# Flag to track whether an instance has been added
 var instance_added = false
 
 func _ready():
-	$code_block_move.connect("test", lmao)
+	#$VBoxContainer/code_block_move.connect("test", lmao)
+	pass
 
 func lmao():
 	print("lmaolmaolmaolmaolmaolmaolmaolmaolmaolmaolmaolmaolmaolmaolmaolmaolmaolmaolmao")

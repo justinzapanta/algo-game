@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbcp2g041nkpb"]
+[gd_scene load_steps=6 format=3 uid="uid://cbcp2g041nkpb"]
 
 [ext_resource type="Script" path="res://scripts/levels/level1_movement.gd" id="1_wqo0l"]
 [ext_resource type="PackedScene" uid="uid://cyf78f2y65kgv" path="res://scenes/blocks/code_block_move.tscn" id="2_oret7"]
@@ -6,28 +6,27 @@
 [sub_resource type="Texture2DRD" id="Texture2DRD_4xxul"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pnkaj"]
-size = Vector2(369, 409)
+size = Vector2(228.25, 313.625)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_ana4x"]
 
 [node name="level1_movement" type="Node2D"]
 script = ExtResource("1_wqo0l")
 
-[node name="code_block_move" parent="." instance=ExtResource("2_oret7")]
-z_index = 99
-position = Vector2(396, 36)
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="code_block_move2" parent="." instance=ExtResource("2_oret7")]
-z_index = 99
-position = Vector2(141, 72)
+[node name="code_block_move" parent="VBoxContainer" instance=ExtResource("2_oret7")]
+position = Vector2(648, 49)
 
 [node name="ScrollContainer" type="ScrollContainer" parent="."]
-custom_minimum_size = Vector2(350, 400)
-offset_left = 802.0
-offset_top = 94.0
+offset_left = 860.0
+offset_top = 143.0
 offset_right = 1152.0
-offset_bottom = 540.0
+offset_bottom = 494.0
 
 [node name="compiler" type="VBoxContainer" parent="ScrollContainer"]
-custom_minimum_size = Vector2(350, 400)
 layout_mode = 2
 
 [node name="compile" type="Node2D" parent="ScrollContainer/compiler"]
@@ -36,17 +35,33 @@ layout_mode = 2
 
 [node name="TextureRect" type="TextureRect" parent="ScrollContainer/compiler/compile/compiler_area"]
 custom_minimum_size = Vector2(350, 400)
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 350.0
+offset_bottom = 400.0
 texture = SubResource("Texture2DRD_4xxul")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ScrollContainer/compiler/compile/compiler_area"]
-position = Vector2(174.5, 194.5)
+position = Vector2(179.125, 169.188)
 shape = SubResource("RectangleShape2D_pnkaj")
 
 [node name="Button" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 929.0
+offset_top = 511.0
+offset_right = 1002.0
+offset_bottom = 583.0
+text = "play"
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_left = 862.0
+offset_top = 6.0
+offset_right = 1151.0
+offset_bottom = 136.0
+texture = SubResource("PlaceholderTexture2D_ana4x")
+
+[node name="Label" type="Label" parent="TextureRect"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "drag and drop d blocks to move innit"
 
 [connection signal="area_entered" from="ScrollContainer/compiler/compile/compiler_area" to="." method="_on_compiler_area_area_entered"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -7,34 +7,30 @@ var is_selected = false
 var is_linked = false
 var preview_sprite = null
 var parent_node = self.get_parent()
+var original_position = Vector2()
+var is_original = true 
 
 signal test
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready():
 	set_process_input(true)
 	preview_sprite = Sprite2D.new()
 	preview_sprite.texture = $Sprite2D.texture
-	preview_sprite.modulate = Color(1, 1, 1, 0.5)  # Make the preview semi-transparent
+	preview_sprite.modulate = Color(1, 1, 1, 0.5)
 	add_child(preview_sprite)
 	preview_sprite.hide()
-	
-	$"..".connect("block_added", return_block)
-	#get_snap_location(preview_sprite)
-	
-	#preview_sprite.position.x = global_var.other_block_pos_x
-	#preview_sprite.position.y = global_var.other_block_pos_y - $Sprite2.texture.get_size().y + 5 
-	
 
+	#$"../..".connect("block_added", return_block)
+	
+	original_position = position  
 
 func return_block():
 	if is_selected:
 		is_selected = false
 		is_dragging = false
-		self.position.x = 50
-		self.position.y = 50
+		position = original_position
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	
 	
@@ -54,15 +50,20 @@ func _process(delta):
 
 func _input(event):
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT:  # Check if the left mouse button is pressed
+		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed && mouse_in:
 				is_dragging = true
 				is_selected = true
-				if self.get_parent() != VBoxContainer:
-					offset = get_global_mouse_position() - position
+
+				if self.get_parent() is VBoxContainer:
+					var clone = duplicate()
+					get_parent().add_child(clone)
+					clone.position = position
+					print(clone.get_parent())
+					clone.offset = get_global_mouse_position() - clone.position
 				else:
-					print("lolvbox")
-				
+					offset = get_global_mouse_position() - position
+					
 				if Input.is_action_just_released("click"):
 					print("Left mouse button released.")
 			elif !event.pressed:
@@ -73,9 +74,9 @@ func _input(event):
 	elif event is InputEventMouseMotion:
 		if is_dragging:
 			position = get_global_mouse_position() - offset
-			global_var.selected_block_pos_x = self.position.x
-			global_var.selected_block_pos_y = self.position.y
-
+			global_var.selected_block_pos_x = position.x
+			global_var.selected_block_pos_y = position.y
+			
 func _on_body_mouse_entered():
 	print("hello")
 	emit_signal("test")
