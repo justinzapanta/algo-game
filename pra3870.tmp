@@ -1,0 +1,139 @@
+[gd_scene load_steps=16 format=3 uid="uid://csa0alod520n2"]
+
+[ext_resource type="PackedScene" uid="uid://d0u3me50savwe" path="res://blocks/varable.tscn" id="1_606an"]
+[ext_resource type="Script" path="res://practice.gd" id="1_lryyu"]
+[ext_resource type="Texture2D" uid="uid://dtwkc5kmr4ekx" path="res://character/player.png" id="2_5uer5"]
+[ext_resource type="Script" path="res://character.gd" id="2_7lx4s"]
+[ext_resource type="Texture2D" uid="uid://xmy8vio117cv" path="res://color/ewan.jpg" id="5_72vtv"]
+[ext_resource type="Script" path="res://1.gd" id="5_lhtnp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uwx7a"]
+atlas = ExtResource("2_5uer5")
+region = Rect2(0, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6anq"]
+atlas = ExtResource("2_5uer5")
+region = Rect2(48, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bken7"]
+atlas = ExtResource("2_5uer5")
+region = Rect2(96, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c32x5"]
+atlas = ExtResource("2_5uer5")
+region = Rect2(144, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1gqv8"]
+atlas = ExtResource("2_5uer5")
+region = Rect2(192, 192, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x77sy"]
+atlas = ExtResource("2_5uer5")
+region = Rect2(240, 192, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4gduu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uwx7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6anq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bken7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c32x5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1gqv8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x77sy")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_jdjmf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n6hsp"]
+size = Vector2(66, 18)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_lryyu")
+
+[node name="variable" parent="." instance=ExtResource("1_606an")]
+editor_description = "Jump ="
+position = Vector2(806, 99)
+
+[node name="variable2" parent="." instance=ExtResource("1_606an")]
+editor_description = "Run ="
+position = Vector2(808, 189)
+
+[node name="variable3" parent="." instance=ExtResource("1_606an")]
+editor_description = "Attack = "
+position = Vector2(812, 283)
+
+[node name="character" type="CharacterBody2D" parent="."]
+position = Vector2(42, 85)
+script = ExtResource("2_7lx4s")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="character"]
+position = Vector2(51, 111)
+scale = Vector2(3.9375, 3.64583)
+sprite_frames = SubResource("SpriteFrames_4gduu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="character"]
+position = Vector2(56, 119)
+shape = SubResource("CircleShape2D_jdjmf")
+
+[node name="Button" type="Button" parent="character"]
+offset_left = 224.0
+offset_top = 276.0
+offset_right = 563.0
+offset_bottom = 370.0
+theme_override_font_sizes/font_size = 100
+text = "run"
+
+[node name="1" type="Area2D" parent="."]
+position = Vector2(413, 64)
+script = ExtResource("5_lhtnp")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="1"]
+position = Vector2(-4, 2)
+scale = Vector2(0.0479167, 0.0296296)
+texture = ExtResource("5_72vtv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="1"]
+shape = SubResource("RectangleShape2D_n6hsp")
+
+[node name="2" type="Area2D" parent="."]
+position = Vector2(407, 302)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="2"]
+position = Vector2(-4, 2)
+scale = Vector2(0.0479167, 0.0296296)
+texture = ExtResource("5_72vtv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="2"]
+shape = SubResource("RectangleShape2D_n6hsp")
+
+[node name="3" type="Area2D" parent="."]
+position = Vector2(417, 190)
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="3"]
+position = Vector2(-4, 2)
+scale = Vector2(0.0479167, 0.0296296)
+texture = ExtResource("5_72vtv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="3"]
+shape = SubResource("RectangleShape2D_n6hsp")
+
+[connection signal="pressed" from="character/Button" to="." method="_on_button_pressed"]
+[connection signal="body_entered" from="1" to="." method="_on__body_entered"]

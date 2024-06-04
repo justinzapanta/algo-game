@@ -1,0 +1,42 @@
+[gd_scene load_steps=5 format=3 uid="uid://d0u3me50savwe"]
+
+[ext_resource type="Script" path="res://blocks/varable2.gd" id="1_fid2b"]
+[ext_resource type="Texture2D" uid="uid://dmiia2qbx53ts" path="res://color/rgyxd48l.png" id="1_n31sk"]
+[ext_resource type="Script" path="res://Area2D.gd" id="3_o7dqj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_32o7a"]
+size = Vector2(273.5, 54)
+
+[node name="variable" type="Sprite2D"]
+script = ExtResource("1_fid2b")
+metadata/_edit_group_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.75, 3.125)
+scale = Vector2(0.436901, 0.130096)
+texture = ExtResource("1_n31sk")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = -132.5
+offset_top = -17.75
+offset_right = -9.5
+offset_bottom = 23.25
+theme_override_font_sizes/normal_font_size = 30
+text = "Name = "
+scroll_active = false
+
+[node name="TextEdit" type="TextEdit" parent="."]
+offset_left = -3.5
+offset_top = -18.75
+offset_right = 130.5
+offset_bottom = 26.25
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-14.5, 1.25)
+script = ExtResource("3_o7dqj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(17, 1)
+shape = SubResource("RectangleShape2D_32o7a")
+
+[connection signal="input_event" from="Area2D" to="Area2D" method="_on_input_event"]
